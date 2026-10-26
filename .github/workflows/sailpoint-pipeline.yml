@@ -1,0 +1,28 @@
+name: SailPoint POC Pipeline
+
+on:
+  workflow_dispatch:
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate-code:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Execute SailPoint POC Code
+        run: python scripts/validate.py
+
+      - name: Pipeline Completed
+        run: echo "SailPoint POC pipeline completed successfully"
